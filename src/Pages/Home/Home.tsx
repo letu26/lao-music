@@ -3,13 +3,12 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import NotStartedIcon from '@mui/icons-material/NotStarted';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import PauseIcon from '@mui/icons-material/Pause';
-import "./Home.scss";
 
 const Home: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [duration, setDuration] = useState(0);
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [progress, setProgress] = useState<number>(0);
+  const [duration, setDuration] = useState<number>(0);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -73,17 +72,20 @@ const Home: React.FC = () => {
     setIsPlaying(!isPlaying);
   };
 
+  //lấy thời gian hiện tại
   const handleTimeUpdate = () => {
     const audio = audioRef.current;
     if (!audio) return;
     setProgress(audio.currentTime);
   };
 
+  //lấy tổng thời gian
   const handleLoadedMetadata = () => {
     const audio = audioRef.current;
     if (audio) setDuration(audio.duration);
   };
 
+  //cập nhật thời gian 
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
     const audio = audioRef.current;
     if (audio) {
@@ -93,13 +95,15 @@ const Home: React.FC = () => {
     }
   };
 
+  //chuyển đến bài tiếp theo
   const handleNext = () => {
     if (currentIndex !== null) {
-      setCurrentIndex((prev) => (prev! + 1) % musicData.item.length); 
+      setCurrentIndex((prev) => (prev! + 1) % musicData.item.length);
       setProgress(0);
     }
   };
 
+  //chuyển về bài trước
   const handlePrev = () => {
     if (currentIndex !== null) {
       setCurrentIndex((prev) =>
@@ -120,21 +124,22 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <div className="container">
-        <div className="home__title">{musicData.title}</div>
-        <div className="home__music">
+      <div className="ml-[250px] min-h-screen bg-[linear-gradient(#3f14146f,_#161110_40%)] p-[25px_35px_0_35px]">
+        <div className="text-white text-[22px] font-semibold">{musicData.title}</div>
+        <div className="flex">
           {musicData.item.map((items, index) => (
             <div
-              className="home__music--cart"
+              className="w-[230px] m-[5] p-[10px] hover:bg-[#FFFFFF0A] rounded-[10px]"
               key={index}
               onClick={() => setCurrentIndex(index)}
             >
-              <div className="home__music--img">
-                <img src={items.image} alt={items.name} />
+              <div className="rounded-[10px] overflow-hidden">
+                <img src={items.image} alt={items.name} className="rounded-[10px] max-h-full max-w-full w-auto h-auto object-cover aspect-square hover:scale-[1.2] hover:transition-all hover:ease-in-out hover:duration-300
+"/>
               </div>
-              <div className="home__music--content">
+              <div className="text-white flex flex-col mt-[10px]">
                 <span>{items.name}</span>
-                <span className="home__music--singer">{items.singer}</span>
+                <span className="text-[#8C8989]">{items.singer}</span>
               </div>
             </div>
           ))}
@@ -142,27 +147,27 @@ const Home: React.FC = () => {
       </div>
 
       {currentSong && (
-        <div className="music-player">
+        <div className="fixed bottom-0 w-full bg-dark-gradient text-white p-[10px_20px] flex items-center z-50 h-[96px]">
           <audio
             ref={audioRef}
             src={currentSong.audio}
             onTimeUpdate={handleTimeUpdate}
             onLoadedMetadata={handleLoadedMetadata}
           />
-          <div className="music-player__left">
-            <img src={currentSong.image} alt="song" />
+          <div className="flex items-center gap-[15px] w-[200px]">
+            <img src={currentSong.image} alt="song" className="w-[50px] h-[50px] rounded-[8px]"/>
             <div>
-              <div className="music-player__title">{currentSong.name}</div>
-              <div className="music-player__artist">{currentSong.singer}</div>
+              <div className="font-semibold">{currentSong.name}</div>
+              <div className="text-[12px] text-[#aaa]">{currentSong.singer}</div>
             </div>
           </div>
-          <div className="music-player__center">
-            <div className="music-player__controls">
-              <button onClick={handlePrev}><SkipPreviousIcon /></button>
-              <button onClick={togglePlay}>{isPlaying ? <PauseIcon />: <NotStartedIcon />}</button>
-              <button onClick={handleNext}><SkipNextIcon /></button>
+          <div className="flex-1 flex flex-col items-center gap-[5px]">
+            <div className="flex items-center gap-[10px]">
+              <button className="bg-transparent border-none text-[20px] text-white cursor-pointer" onClick={handlePrev}><SkipPreviousIcon /></button>
+              <button className="bg-transparent border-none text-[20px] text-white cursor-pointer" onClick={togglePlay}>{isPlaying ? <PauseIcon /> : <NotStartedIcon />}</button>
+              <button className="bg-transparent border-none text-[20px] text-white cursor-pointer" onClick={handleNext}><SkipNextIcon /></button>
             </div>
-            <div className="music-player__progress">
+            <div className="flex items-center gap-[10px]">
               <span>{formatTime(progress)}</span>
               <input
                 type="range"
@@ -170,8 +175,9 @@ const Home: React.FC = () => {
                 max={duration}
                 value={progress}
                 onChange={handleSeek}
+                className="w-[500px] h-[4px]"
               />
-              <span>{formatTime(duration)}</span>
+              <span className="text-[12px] w-[40px] text-center">{formatTime(duration)}</span>
             </div>
           </div>
         </div>

@@ -22,6 +22,9 @@ export default {
           custom2: "0px 1px 3px 0px rgba(16, 24, 40, 0.1)", // #1018281A
         },
       },
+      backgroundImage: {
+        'dark-gradient': 'linear-gradient(to top, rgb(37, 37, 37) 0%, rgb(50, 49, 49) 50%, rgb(64, 64, 64) 100%)',
+      },
     },
   },
   corePlugins: {
