@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import "./homelayout.scss";
 import Sidebar from "@components/Sidebar/Sidebar";
 import Header from "@components/Header/Header";
-import Home from "src/Pages/Home/Home";
+import { Outlet } from "react-router-dom";
 interface HomeLayoutProps {
   children: ReactNode;
 }
@@ -11,7 +11,7 @@ const HomeLayout: React.FC<HomeLayoutProps> = () => {
     <>
       <Header />
       <Sidebar />
-      <Home />
+      <Outlet />
     </>
   )
 }

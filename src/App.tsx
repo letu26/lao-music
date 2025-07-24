@@ -8,9 +8,9 @@ import NotFound from "./components/NotFound/clientNotFound";
 import HomeLayout from "./layout/user/HomeLayout";
 import "./styles/global.scss";
 import "./styles/style.scss";
-import Rankings from "src/Pages/Rankings/Rankings";
 import Home from "./Pages/Home/Home";
-import Topics from "src/Pages/Topics/Topics";
+import Rankings from "./Pages/Rankings/Rankings";
+import Topics from "./Pages/Topics/Topics";
 // import {updateUserInfo} from "@redux/slices/UserSlice";
 // import ApiAuth from "@api/ApiAuth";
 // import {useQueryClient} from "@tanstack/react-query";
@@ -49,7 +49,7 @@ function App() {
               }
             >
               <Route path="/" element={<Home />} />
-              <Route path="/ranking" element={<Rankings />} />
+              <Route path="ranking" element={<Rankings />} />
               <Route path="/topics" element={<Topics />} />
             </Route>
           </Route>
