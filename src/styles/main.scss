@@ -4,3 +4,14 @@
 @use "tailwindcss/base";
 @use "tailwindcss/components";
 @use "tailwindcss/utilities";
+
+.swiper-button-next,
+.swiper-button-prev {
+  @apply w-12 h-12 rounded-full flex items-center justify-center text-white !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px; /* Thu nhỏ icon để nằm gọn trong hình tròn */
+  font-weight: bold;
+}

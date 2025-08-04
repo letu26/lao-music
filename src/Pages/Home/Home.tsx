@@ -3,6 +3,11 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import NotStartedIcon from '@mui/icons-material/NotStarted';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import PauseIcon from '@mui/icons-material/Pause';
+import SongRecommented from "@components/Recommented/SongRecommented";
+import SongTop from "@components/NhacTop100/SongTop100";
+import TopGenresPlaylists from "@components/TopGenresPlaylists/TopGenresPlaylists";
+import YTBTrending from "@components/YTBTrending/YTBTrending";
+import FavoriteArtist from "@components/FavoriteArtist/FavoriteArtist";
 
 const Home: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number | null>(null);
@@ -124,7 +129,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <div className="ml-[250px] min-h-screen bg-[linear-gradient(#3f14146f,_#161110_40%)] p-[25px_35px_0_35px]">
+      {/* <div className="lg:ml-[250px] min-h-screen bg-[linear-gradient(#3f14146f,_#161110_40%)] p-[25px_35px_0_35px]">
         <div className="text-white text-[22px] font-semibold">{musicData.title}</div>
         <div className="flex">
           {musicData.item.map((items, index) => (
@@ -181,7 +186,14 @@ const Home: React.FC = () => {
             </div>
           </div>
         </div>
-      )}
+      )} */}
+      <div className="bg-[linear-gradient(#3f14146f,_#161110_40%)]">
+        <SongRecommented />
+        <SongTop />
+        <TopGenresPlaylists />
+        <YTBTrending />
+        <FavoriteArtist />
+      </div>
     </>
   );
 };

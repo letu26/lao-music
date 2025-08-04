@@ -1,4 +1,4 @@
-import {loginUser, logoutUser} from "@redux/slices/UserSlice";
+import {loginUser, logoutUser} from "../redux/slices/UserSlide";
 import axios, {AxiosError, AxiosRequestConfig, AxiosResponse} from "axios";
 import {toast} from "react-toastify";
 import Config from "../config";
@@ -79,7 +79,7 @@ function displayError(dataError: IDataError): void {
   const {errorCode} = dataError;
   let errorMessage;
 
-  const error = ListErrorMessage.find((dt) => dt.error_code === errorCode);
+  const error = ListErrorMessage.find((dt:any) => dt.error_code === errorCode);
   if (error) {
     errorMessage = error.description;
   } else {

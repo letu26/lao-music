@@ -10,6 +10,8 @@ const Sidebar: React.FC = () => {
   return (
     <>
       <div className="
+        lg:block
+        hidden
         h-screen 
         w-[250px] 
         fixed 
